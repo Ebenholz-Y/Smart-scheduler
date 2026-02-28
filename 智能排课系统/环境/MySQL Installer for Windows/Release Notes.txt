@@ -1,0 +1,899 @@
+MYSQL INSTALLER 1.6
+--------------------
+1.6.16 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Cancellation of installations or upgrades now work as expected. Notice that you cannot cancel an installation or update that is already underway; 
+  you can only cancel the installations or updates that have been selected and are waiting for execution. And for that reason, if there is only
+  one product to be installed or updated and its execution has started, the Cancel button is now disabled.
+* When ran in silent mode, the MySQL Community Server Installer installed the commercial instead of the community version of MySQL.
+* After a product was downloaded by the Download step of MySQL Installer, navigating back to the Select Products page and clicking Next would 
+  display the Download page again, even when there was nothing left to download; this fix prevents the Download page from appearing 
+  unnecessarily in that scenario.
+* When users specified an out-of-range MySQL Router port number, the error message gave the wrong range. The error message was also repeated 
+  unnecessarily at a few other fields.
+* When using MySQL Installer to bootstrap MySQL Router, the default user in the MySQL Router configuration page is now root and the default port 
+  is now 3310.
+* The Next button is now enabled by default in the Select Products to Upgrade configuration page and no longer requires that an element is selected
+  from the Available Upgrades list view.
+* The Reconfigure link in the main dashboard for the MySQL Router product is only visible if there is a corresponding MySQL Server installation 
+  that has already been configured.
+* After installing the Samples and Examples product, the configuration of said product is only initiated if there is a corresponding MySQL Server 
+  installation that has already been configured.
+
+
+1.6.15 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Fixed a bug where reusing a data directory from an older version in a new installation caused an in-place upgrade to be triggered when
+  validating the password of the root user in the Accounts and Roles configuration page. The in-place upgrade is now triggered at the end
+  of the configuartion operation as expected.
+* Fixed a bug in the Router configuration page where it was not possible to provide a password with less than 4 characters, however MySQL
+  Server does support short or empty passwords.
+* Added support for creating MySQL Users in the Accounts and Roles configuration page and in the CLI that contain special characters in which
+  case the user name must be enclosed in single quotes, double quotes or backticks as specified in the official MySQL documentation.
+
+
+1.6.14 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* The Accounts and Roles configuration page allowed duplicate users.
+* Improved tooltip text for the Logging Options interface.
+* The main dashboard would not show the link to reconfigure MySQL Router after skipping the initial configuration. Reconfiguration was
+  only possible until Installer was restarted.
+
+
+1.6.13 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Fixed a bug preventing to continue with an upgrade when an existing data directory is used in a new server installation.
+* Fixed MySQL Router documentation links in the manifest.
+* The commercial version now validates the MySQL Oracle Support (MOS) credentials email address.
+
+
+1.6.12 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Clicking [X] on the confirmation window for a Cancel operation now lets the operation continue rather than cancel it.
+* Fixed behavior of the left, right, and double left arrows to function as expected.
+* The Installer manifest (the manifest that is periodically downloaded by the Installer to list available MySQL products) was
+  modified to force users with Installer 1.6.9 or older to upgrade to the latest Installer version.
+
+
+1.6.11 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Fixed the authentication method that MySQL Installer uses for accessing the My Oracle Support (MOS) website to permit 
+  downloading commercial MySQL products, which incorrectly parsed special characters in the Single Sign On (SSO) password.
+* MySQL Installer could not upgrade from MySQL Server 8.0.0-8.0.11 as the MSI for those versions remove the Windows MySQL service 
+  during an upgrade or uninstall operation. Now MySQL Installer shows the Windows service configuration page during an upgrade from 
+  these old MySQL versions, and provides an option to either create the Windows service or proceed with the server being run as a 
+  process.
+* The Removing Windows Firewall step would fail if the my.ini file was missing a mysqlx_port definition.
+* Removed download support for product versions that reached End of Life (EoL), including: MySQL Server 5.7 and earlier, MySQL Shell 
+  1.0, MySQL Router 2.x, MySQL NDB Cluster 7.4 and earlier, MySQL Cluster Manager 1.x, MySQL Enterprise Backup 4.1 and earlier, 
+  MySQL Utilities, MySQL Workbench 6.3 and earlier, MySQL Enterprise Monitor 4.0 and earlier, MySQL Notifier, MySQL for Excel, 
+  MySQL for Visual Studio, and documentation specific to the EoL versions.
+* Clicking the [X] close button on a wizard's page now yields a confirmation popup if the wizard is busy executing an operation.
+* The status indicator for the product removal selector would not update under certain conditions.
+* The server_type variable was removed from the generated MySQL Server configuration file, because it was only relevant to MySQL 
+  Installer. This information is now stored in the MySQL Installer settings-{license}.xml file.
+* Removed download support for all connectors. The Installer still detects existing connector installations and allows uninstalling
+  them, but they cannot be installed or upgraded. Instead, install and upgrade each connector from the MySQL Downloads page. The 
+  latest MySQL connector version supports all active MySQL Server versions. For example, MySQL Connector/Python 9.0.0 supports 
+  and is recommended for MySQL 8.0, 8.4, and 9.0.
+
+
+1.6.10 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Fixed a couple of broken links in the Resources Links section of the About page.
+* Fixed a bug in the CLI where the --silent option would still prompt for user input when there was no internet connection
+  and offline mode was disabled.
+* Updated the configuration templates to set the mysqlx_port server variable instead of loose_mysqlx_port when creating or 
+  updating the my.ini configuration file.
+* Updated PE (exe, dll, msi) files to include the correct license metadata. The ProductName field was adjusted to not include 
+  the license as part of the name and to be the same for all PE files. The product description was moved from the Comments field 
+  to the FileDescription field and the LegalTrademarks field was set for all PE files. This metadata can be inspected by using 
+  the VersionInfo Powershell command or similar tool.
+
+
+1.6.9 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Fixed a bug where the installation context defined by standalone MSI files was sometimes being altered by MySQL Installer during
+  an install or upgrade operation.
+* Fixed a bug where authenticating into My Oracle Support (MOS) was no longer possible due to changes in the MOS website. This 
+  prevented from downloading commercial MySQL products.
+
+
+1.6.8 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Removed any warnings from the MySQL Server 8.0 error log generated during a server configuration except for the expected 
+  MY-010068 warning entry.
+
+
+1.6.7 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Fixed a bug in the Select Features wizard page where it was possible to unselect child features even if the parent feature 
+  was marked as required.
+* Updated server templates to remove the use of the "“" and "”" utf-8 characters as these are not supported in Workbench and
+  would prevent my.ini files generated using said templates from being loaded.
+
+
+1.6.6 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Added support for installing both 32 and 64 bit variants of Connector/ODBC and Connector/C++.
+* Added an Offline mode that enables users to run MySQL Installer with all internet functionality disabled. Users without an 
+  internet connection can use this mode to prevent MySQL Installer from automatically attempting to download the latest manifest 
+  and the MySQL products not found in the product cache. Only products found in the product cache can be installed when this 
+  mode is enabled. When started, MySQL Installer prompts the user to enable offline mode if it finds no internet connection. 
+  Option is available within the General tab of the MySQL Installer options dialog.
+* Made enhancements to the download of MySQL products. Failed downloads are now retried up to 3 times for failures caused
+  by interrupted or incomplete downloads. Also, the algorithm now automatically adjusts the number of allowed concurrent
+  downloads if the failures are caused by an excess of concurrent downloads.
+* Fixed a bug in which it was incorrectly determined if the installation of a MySQL product was expected to be per-machine or
+  per-user. This issue would prevent the new installation from identifying the old installation, which resulted in a faulty
+  installation/upgrade.
+* Fixed a bug where the selected authentication method was not being persisted, resulting in failed configurations when 
+  selecting an authentication method other than the default.
+* Fixed a memory leak issue where web client instances were not being correctly disposed and improved the memory usage by
+  reusing web clients instances for product downloads where possible.
+* Fixed two issues where it was not possible to use certain characters as part of the password for the root account. This was 
+  not consistent with what is supported by the MySQL Server product by default.
+* Fixed a bug where passwords provided during a server configuration were incorrectly being sanitized, resulting in the text
+  provided by the user being altered as the passwords were being typed.
+
+
+1.6.5 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Fixed a bug where the server error log was not given the correct permissions when a custom path was provided by the user.
+* Fixed a bug where it was not possible to create a MySQL user with the DB designer role during a server configuration due
+  to the mysql.proc table no longer existing in MySQL Server 8.0.
+* Fixed a bug where the server configuration would fail if the user specified a service account other than the default Network 
+  Service account because the correct permissions to access the server files were not being granted.
+* Fixed a bug where it was possible to assign the same named pipe name to multiple versions of the server from different 
+  series resulting in the configuration failing.
+* Fixed a bug where the "Starting the server" configuration step would run indefinitely because it did not validate the state 
+  of the Windows service. The service not running can be caused by multiple reasons and it made sense that the step would fail 
+  eventually if the service failed to start.
+* Fixed a bug where the server configuration type specified in the Type and Networking configuration page was not persistent
+  when attempting to reconfigure the server.
+* Slightly reduced the installation time of all MySQL products. This is more noticeable with large MSIs and/or MSIs that have 
+  been previously installed.
+* Improved the automatic catalog download by also allowing the product catalog to be applied even if the version numbers are 
+  not compatible but MySQL Installer is still missing the full product catalog.
+* Updated the server configuration templates to use the latest descriptions and default values when the server is being 
+  configured.
+* Improved the download of MySQL products by including a retry all button to retry any failed downloads as well as fixed a
+  bug where the Try Again link for a failed download re-triggered all failed downloads instead of just the one that was
+  selected.
+* Added a new server configuration type called Manual, which allows users to keep the default values assigned to the server
+  variables instead of attempting to optimize them. This enables users to have full control on deciding which variables to
+  update.
+* Added support to configure an HTTP proxy. Proxy details can be retrieved automatically from the system settings or can be 
+  manually provided by the user who configures the proxy with the MySQL Installer options dialog. Although .NET does not yet 
+  support HTTPS proxies, connections made with MySQL Installer are secure and it is possible to execute HTTP/HTTPS requests
+  through an HTTP proxy server.
+
+
+1.6.4 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Re-architected the CLI (mysqlinstallerconsole.exe) to follow a consistent syntax and naming convention for actions
+  and options and to have a better correspondence with the naming conventions used by MySQL Server and MySQL Shell.
+  This change also fixed several bugs where some configuration options and features were available when running
+  MySQL Installer in UI mode but not in the CLI.
+* Improved the performance of installing, upgrading and removing MySQL products. Some products would cause a performance
+  degradation when the MSIs were being executed due to the mishandling of resources when updating the UI. This was
+  particularly notorious with products such as MySQL Shell and MySQL Workbench. Performance for affected products has now
+  been improved in over 50%.
+* A new server configuration page has been added to simplify the access management of files in the data directory.
+* Added support for the configuration of MySQL Router when using the CLI.
+* Added support for setting the X Protocol port during a server configuration via the mysqlx_port configuration argument
+  when using the CLI.
+* Added support for enabling or disabling the automatic product catalog updates when using the CLI.
+* Fixed a bug in the CLI where the console output failed to indicate that no features will be modified if the selected
+  features are already in the selected install/remove states.
+* Fixed a bug in the CLI where attempting to install and already installed product would result in an error that did not
+  disclose the product that caused the conflict.
+* Fixed a bug in the CLI where a missing space would concatenate the "failed!" or "done!" messages with the name of the
+  affected product. The messages were also updated to be upper-case.
+* Fixed a bug in the CLI where it was no longer possible to create MySQL users during a server reconfiguration.
+* Fixed a bug in the CLI where the --silent option would still prompt for user input in multiple scenarios.
+* Fixed a bug in the CLI where the -show-settings option would fail to execute for non-installed products.
+* Fixed a bug in the CLI where it was possible to install already installed products or other versions of the same
+  product with the --install action. This would sometimes corrupt existing installations.
+* Fixed a bug in the commercial CLI to request MOS credentials when attempting to download a product if the credentials
+  had not yet been provided.
+* Fixed a bug that prevented determining correctly if the user is running MySQL Installer in a 32 or 64 bit OS. This would
+  cause incorrect packages to be selected for installation in some scenarios.
+* Updated the server configuration templates to use the default value of the innodb_buffer_pool_size server variable to 128m.
+
+
+1.6.3 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Fixed a bug where configuring a MySQL Server to only support the Named Pipe protocol failed because the connection
+  attempts would fail.
+* Added the Named Pipe wizard page to support the configuration of the named_pipe_full_access_group server system
+  variable.
+* Fixed a bug where the MySQL command line shortcut created during a MySQL Server installation would not work when
+  Named Pipe was the only protocol enabled.
+* Fixed a bug where the installation directory and/or data directory (in the case of MySQL Server) were not being
+  validated properly in the Advanced Options dialog.
+* Fixed a bug that improves the validations of the binary log path in the Logging Options wizard page.
+* Corrected the Client Only setup type description to match the products that are actually being installed.
+* Fixed a bug where the merging of product catalogs would append new packages instead of prepending them to the list.
+  This caused the CLI to recommend the newest package as the last option during a MySQL product installation operation.
+* Fixed a bug preventing the MOS credentials to be correctly validated in the My Oracle Support Authentication dialog
+  when performing a catalog update for the commercial version of MySQL Installer.
+* Fixed a bug where the sakila and world databases installed as part of the Samples & Examples product were outdated and
+  used the wrong encoding when running the SQL scripts.
+* Fixed a bug in the Download wizard page which indicated that the products were being installed when in reality they were
+  being downloaded.
+* Updated the templates used for generating the my.ini server options file to correctly state the expected location of
+  the my.ini file when MySQL Server was installed using MySQL Installer.
+
+
+1.6.2 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Added support for installing MySQL products other than MySQL Server into paths that contain unicode characters.
+  This is a known limitation of MySQL Server.
+* Fixed a bug in the Select Features wizard page preventing the default features to be correctly identified.
+* Removed the innodb_open_files option from the configuration templates since it is now automatically calculated by
+  the server.
+* Fixed a bug in the CLI where using the showsettings option resulted in an unhandled exception.
+* Fixed a bug in the Upgrade Available dialog shown during a catalog update which caused the close button to be
+  interpreted as accepting the upgrade.
+* Fixed a bug where the most recent product catalog was not applied if the user accepted an upgrade when performing
+  a catalog update.
+* Added missing information about the MEB product to the applicable setup types in the Choosing a Setup Page wizard page
+  for the commercial version of MySQL Installer.
+* Fixed a bug where the now unused scheduled task was still being created by the MySQL Installer MSI.
+* Updated the default number of days to check for catalog updates to 1 and fixed a bug where resetting this value in the
+  MySQL Installer options did not work.
+
+
+1.6.1 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Updated multiple broken links found in the Installation Complete page.
+* Updated the MySQL Server 8.0.27+ configuration templates to replace the use of the default_authentication_plugin
+  deprecated variable with the new authentication_policy variable, which provides added functionality for
+  multi-factor authentication. 
+* Fixed a bug where warnings indicating the use of deprecated TLS versions when connecting to a MySQL Server instance
+  would show in the error log. Warnings have since been removed starting MySQL Server 8.0.28.
+* Fixed a bug where the reconfiguration of a MySQL Server installation previously set to allow the TCP/IP, Shared
+  Memory and Named Pipes connection protocols would result in a malformed configuration file, which in turn prevented
+  protocols other than TCP/IP to work properly.
+* Fixed a bug where the textbox used to filter products in the Select Products and Features page was case sensitive,
+  causing searches with incorrect casing to fail to find any matching MySQL products.
+  
+
+MYSQL INSTALLER 1.4 / 1.6
+--------------------
+1.4.39 / 1.6.0 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Fixed a bug where the location of the data directory could not be overriden by setting the datadir option in the
+  server configuration file.
+* Fixed a bug preventing the successful configuration of MySQL Server 5.6 due to a connection error after starting
+  the server.
+* Fixed a bug in the CLI where the silent option was being ignored during an upgrade operation.
+* Fixed a bug in the CLI where the features to install were being ignored and instead all features were installed.
+* Fixed a bug in the CLI where a recent installation of MySQL Installer was not correctly initialized upon executing
+the update command.
+
+
+MYSQL INSTALLER 1.4
+--------------------
+1.4.38 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Fixed a bug where the CLI failed to find the latest list of MySQL products when users attempted an upgrade.
+* Fixed a bug preventing a recent manifest from being downloaded when executing the CLI update command.
+* Fixed a couple of bugs where it was not possible to configure a server installation to connect using the Shared
+  Memory protocol or a combination of the TCP/IP and Shared Memory protocols.
+* Added support for including and excluding startup options in the options file based on the MySQL Server version
+  being installed or configured.
+* Fixed a bug preventing successful authentication of an Oracle SSO account when using the commercial version of
+  MySQL Installer.
+
+
+1.4.37 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Fixed a bug preventing the most recent manifest from being applied if the current installation had previously
+  been upgraded to version 1.4.36.
+* Fixed a bug preventing commercial versions of MySQL Installer from being able to apply a mandatory upgrade.
+* Fixed a bug where attempting to upgrade a server installation that had not yet been configured would fail due
+  to the list of configuration steps not being determined correctly.
+* Fixed a bug where the configuration pages were not being shown after a server installation if the installation
+  procedure required the server to be downloaded.
+
+
+1.4.36 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Fixed a bug where features marked as required for stand-alone MSIs were allowed to be unselected in MySQL
+  Installer.
+* Removed the creation of the scheduled task that checked for catalog updates. Instead, MySQL Installer now checks
+  for catalog updates when the program starts and the specified number of days since the last check have passed.
+* Fixed a bug where the Retry button did not perform any action when a product uninstall failed.
+* Fixed a bug where the Removing Windows Firewall rules removal step was always being executed even when no
+  firewall rules had been created.
+* Fixed a bug where MySQL Shell closed automatically during the first run.
+* Fixed a bug where the Back button was not enabled even when the download of products failed in the Download
+  page.
+* Updated the product installation workflow to enable the selection of features to install only when the user
+  selects the "Enable the Select Features page to customize product features" option in the Select Products page.
+* Updated the Server configuration file templates to include the correct default values for server variables.
+
+
+1.4.35 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Removed server configuration types related to InnoDB cluster (Sandbox, Seed of a new InnoDB cluster and replica
+of an existing InnoDB cluster). MySQL Shell is now the recommended tool for performing InnoDB cluster configurations.
+* Fixed multiple broken links that prevented the access to the release notes of some MySQL products.
+* Fixed a bug where the Retry button would overlap with the list of removed products in the Remove Selected Products
+  page.
+* Replaced mentions of master and slave with source and replica respectively.
+* The Server Data Files feature is no longer available when attempting to install MySQL Server 8.0.21+.
+* Removed the link to the release notes of the Documentation and Samples & Examples products in the Select Products To
+  Upgrade page since release notes for said products do not exist.
+* Fixed a bug where the Back button was incorrectly being enabled in the Remove Selected Products page whenever the
+  Execute button was clicked.
+* Fixed a bug in the Check Requirements page where the Next button was incorrectly being enabled even when no products
+  met the requirements needed for installation.
+* Fixed a bug where the MySQL Server configuration failed during a connection attempt due to the local computer mapping
+  to multiple IP addresses.
+
+
+1.4.34 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Fixed a bug where MySQL Installer failed to release a handle on the Windows service for MySQL causing the need for a
+  reboot. Additionally, a bug where the reboot check box remained hidden was corrected. Finally, added an extra
+  validation to check for the existence of the Windows service for MySQL after a Server configuration or removal to
+  correctly determine when a reboot is required.
+* Fixed a bug where the Check For Catalog Updates check box in the MySQL Installer Options dialog was not being reset to
+  its default value.
+* Fixed a bug where during a Server reconfiguration the previous X Plugin firewall rule was not being removed.
+* Fixed a cosmetic bug where the name of the Connector/Python product also displayed the version number.
+* Fixed a bug where the creation of a InnoDB cluster instance failed for Server versions lower than 8.0.16, since
+  they did not support setting a recovery method.
+* Improved the implementation of InnoDB cluster operations to better handle failed configurations by reverting
+  settings to the state they were before the configuration failed.
+* Added an extra validation to prevent setting the same Server ID for an instance joining an existing production
+  InnoDB cluster.
+* Added an extra validation to ensure that a Server instance previously configured as a member of an InnoDB cluster
+  is made writable prior to attempting to update its configuration.
+
+
+1.4.33 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Removed from the manifest all products and series of products that are no longer supported or under
+  development.
+* Improved the loading of MySQL plugins by executing the SQL scripts provided with the server and executing the
+  INSTALL command instead of loading the plugin via the configuration file when necessary.
+* Fixed an issue where the installation of Connector/Python prevented the installation of other products.
+* Fixed an issue in the CLI where providing a port number other than the default resulted in a configuration
+  error.
+* Fixed a bug in the CLI where the configuration options were parsed incorrectly and resulted in a null
+  argument exception.
+* Fixed a bug that reverted the failed icon to a success icon even when a configuration failed. This was a
+  purely cosmetic issue, the configuration in question would complete successfully.
+* Fixed a typo in the Check Requirements pop up window.
+
+
+1.4.32 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Modified the product-remove process to show a status of "Completed (with errors)" whenever a product uninstall
+  was completed, but a non-mandatory step failed to execute successfully. The label displayed on the bottom of
+  the page also alludes to this and recommends reviewing the log because manual intervention may be required.
+* Fixed a bug in the Router configuration page where the connection test failed to determine that MySQL Server
+  is a seed instance within an InnoDB cluster. This prevented the bootstrap process from being executed.
+* During a server InnoDB cluster configuration, increased the timeout seconds prior to raising an error when
+  attempting to prepare MySQL Server for InnoDB cluster usage.
+* Fixed a bug where the green check mark and the error icon would overlap when creating a custom user account
+  during a MySQL Server with windows service configuration.
+* Fixed a bug where pre-requisite check version limits were not being inclusive.
+* Updated the Windows Server configuration page to also validate the service name.
+* During a product upgrade, the user can click the CHANGES link to open the official documentation detailing the
+  changes made to a specific version. The links for multiple products were incorrect and have since been fixed. 
+* Improved pre-requisite checks by allowing MySQL Installer to also evaluate relevant rules when selecting which
+  products to install. Previously, rules were only being evaluated when first launching the application.
+* Fixed a couple of grammar errors in the Check Requirements wizard page.
+* Fixed a bug where in certain scenarios the Finish button was not enabled after uninstalling a product.
+
+
+1.4.31 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+* Modified the product remove process to now display a list of steps to be executed similar to the current
+  configuration process.
+* Modified the product reconfiguration and remove process to display a wizard page requesting user input for
+  removing the data directory, removing a sandbox InnoDB cluster, or performing an action on a production InnoDB
+  cluster based on the current server configuration type. These changes remove the need for popup messages in
+  those cases.
+* Updated the product remove process to indicate on which MySQL Server version an action such as removing the
+  data directory is being taken. Previously, the popup message failed to indicate the affected server version.
+* Updated the product remove process to log pre-remove and post-remove actions taken when uninstalling a product.
+* MySQL Installer now warns users when they attempt to install or upgrade to a product version that is
+  incompatible with a locally installed, or selected for installation, MySQL Server version.
+* The License Agreement wizard page is no longer displayed when first opening MySQL Installer, instead it is
+  now available in the About page. The About page now contains three sections: the About MySQL, License and
+  Resources Links section.
+* Improved the failure message used when configuring MySQL Server as a service and the specified user didn't have
+  the required permissions to start the service.
+* Updated the description for the myisam_sort_buffer_size server system variable in all .ini templates.
+* Fixed a bug where verifying the root user password after an upgrade would take very long to complete.
+* Fixed a bug where filtering for products using the Current GA maturity level returned incorrect results.
+* Fixed a bug where the user could change the Server ID when reconfiguring a MySQL Server instance previously
+  configured as part of a production InnoDB cluster. The Server ID can no longer be updated since this is
+  currently not supported.
+* Fixed a bug where the Reconfigure button was not visible after cancelling a reconfiguration process.
+* Fixed a bug where an OperationCancelledException was being raised when attempting to reconfigure or remove a
+  product after cancelling a reconfiguration process.
+* Fixed a bug related to uninstalling MySQL Installer in which no Cancel button was provided in the confirmation
+  dialog. In addition, pressing the Esc key also triggered MySQL Installer to uninstall.       
+* Fixed a bug where the Uploads directory for a MySQL Server configuration would always be created in the default
+  installation location even when the user specified a custom location.
+* Fixed a bug where the configuration of MySQL Router would allow to proceed even if the connection details were
+  incorrect.
+
+
+1.4.30 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * Display of validation errors and warnings has been standardized among all configuration pages.
+ * Added the Resources Links section to the About Page, providing helpful information for users.
+ * Removed support for configuring the X Plugin in pre-GA versions of MySQL Server 8.0.
+ * Eliminated the possibility of adding the local instance to an InnoDB cluster residing on the same machine.
+ * Added a validation to the host name field that prevents users from advancing to the next page if the server
+   is not part of an InnoDB cluster.
+ * Fixed a bug where an upgrade would fail if the system tables upgrade was skipped and the upgrade process
+   was slow for a MySQL Server instance configured as a process.
+ * Fixed a bug where switching the authentication method during a reconfiguration would fail.
+ * Fixed a bug where a reconfiguration would fail when using a password with blank spaces. 
+ * Fixed a bug where entering special characters in the Seconds field of the Logging Options configuration
+   page blocked all other text boxes.
+ * Fixed a bug where entering special characters in the Advanced Options Path field of the Advanced Options
+   dialog would crash the application.
+
+
+1.4.29 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * Added support for creating and configuring the local MySQL Server 8.0 instance as the seed of a new InnoDB
+   cluster.
+ * Added support for creating and adding the local MySQL Server 8.0 instance to a running InnoDB cluster on
+   the network.
+ * Added support for system table upgrades that are handled by the server (mysqld.exe) instead of by
+   mysql_upgrade.exe starting from MySQL Server 8.0.16.
+ * Fixed a bug where upgrading from MySQL Server 5.6.42 would not be possible due to missing meta data in the
+   manifest.
+ * Fixed a bug where attempting to configure a MySQL Server 5.7 or 8.0 installation failed with the message
+   "Invalid Server Template".
+
+
+1.4.28 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * All UI elements have accessibility-related properties set to comply with screen narrators.
+ * Unified throughout the application the look and feel of message dialogs for information, questions and
+   errors.
+ * Fixed an issue where the Test Connection button of the MySQL Router configuration wizard page was not
+   testing the connection correctly for newer community versions of MySQL Server 5.7. SSL is enabled by
+   default in commercial versions and disabled in community ones, and MySQL Installer was wrongly expecting
+   SSL to be always enabled instead of just preferring it.
+ * Fixed an issue using the Modify action for an installed package to add and remove features at the same time.
+ * Fixed a bug where users could attempt to add MySQL users during a MySQL Server configuration (on an initial
+   installation), and the MySQL User Account dialog did not enforce password confirmation.
+ * Fixed a bug where Windows authenticated users could not be created during a MySQL Server configuration (on
+   an initial installation); the MySQL User Account dialog did not validate Windows security tokens correctly.
+ * Fixed a bug where Windows authenticated users could not be validated using Windows security tokens
+   involving a Windows domain. Now Windows users can be validated on the local machine or within the domain.
+   When the current Windows authenticated user isn't able to access the Active Directory of the domain the user
+   can alternatively provide the credentials for a domain administrator with such privileges.
+ * Fixed a bug where the MySQL User Account dialog was adding extra backslashes to the query sent to MySQL
+   Server to create a Windows authenticated user when entering its Windows security tokens using double
+   backslashes (as MySQL Server documentation states for Windows authenticated users). MySQL Installer was
+   expecting single backslashes (as Microsoft documentation states for Windows security tokens). Now MySQL
+   Installer supports entering single and double backslashes (for example, domain\user and domain\\user).
+ * Fixed a problem where message dialogs would go to the back of the caller MySQL Installer windows instead
+   of remaining always on top.
+ * Fixed a problem where My Oracle Support options were not being enabled or disabled as expected.
+ * Modified the help description for the lower_case_table_names variable in the configuration file templates of
+   all applicable MySQL Server versions. The help description was misleading before, now it matches the online
+   documentation.
+ * Fixed the documentation link in MySQL Server 8.0 configuration file templates, it was pointing to MySQL
+   Server 5.7 documentation instead of the correct MySQL Server 8.0 one.
+ * Modified the documentation links for all MySQL Server configuration file templates to use https instead
+   of http.
+ * Added support for creating MySQL users with an empty or blank password via the MySQL User Account dialog.
+ * Ensured MySQL Server does a clean shutdown after a database upgrade instead of killing the server process.
+ * Made the calls to client programs like mysql, mysqladmin and mysql_upgrade more secure by avoiding to pass
+   the root password on the command line and rather storing it in a configuration file in a temporary location
+   just while the client program runs.
+
+
+1.4.27 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * Added Connectivity Options to the Options dialog to configure the way MySQL Installer determines if there
+   is a valid connection to the internet before attempting to download product updates. A suggested automatic
+   method is offered, or a manual one where a list of links can be supplied (and modified) to check if a
+   connection to any of them can be established.
+ * Ensured that navigation of all the product by keyboard is possible and that the flow is natural.
+ * Fixed a bug where the Windows pipe name on a Server re-configuration was being incorrectly changed.
+ * Ensured the log file paths are validated during a Server configuration, so no invalid values can be saved
+   to the configuration file.
+ * The Server Samples and Examples and Server Documentation product packages are no longer installed on a
+   client-only setup, since the installation and configuration of those products are dependant on an installed
+   Server.
+ * Modified the flow of an initial installation of MySQL Installer to always show the Add Products wizard if
+   no products are initially installed and MySQL Installer is closed. This also ensures that if MySQL
+   Installer is closed without accepting the License Agreement, the License Agreement page is the very first
+   page shown when MySQL Installer is opened again.
+ * Fixed a bug where a Server configuration was attempting to remove a Windows Firewall rule with the default
+   TCP/IP port (3306) or the default X Plugin port (33060) before creating new Windows Firewall rules for the
+   configured port numbers (which may differ from the default ones). This problem was causing that if another
+   Server installation used those ports, the Windows Firewall rules were deleted incorrectly.
+ * Fixed some warnings displayed during Server startup related to the read_buffer_size and
+   read_rnd_buffer_size variables not being set with proper default values. Now the values are set correctly
+   during an initial Server configuration.
+ * Ensured that the binary log is enabled during a Server configuration, for versions (like 8.0.x) that
+   suggest the binary log is enabled by default.
+ * Ensured that deprecated/invalid Server variables are removed from the Server configuration file during a
+   Server upgrade or during a Server reconfiguration.
+ * Fixed an unhandled exception that was preventing MySQL Installer to upgrade itself when a new version of
+   Installer was detected and automatically downloaded for installation.
+ 
+
+ 1.4.26 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * Fixed a bug that was not setting the native authentication plugin when configuring a Sandbox InnoDB
+   cluster. Now the mysql_native_authentication_plugin is set for root and cluster related sandbox user
+   accounts.
+ * The Advanced Configuration options screen is split into two screens: Logging Options and Advanced Options.
+   The first screen contains all the fields related with logging and the advanced options will contain the
+   server ID and radio button options to choose which value will be set for lower_case_table_names server
+   option. In the case of 8.0 servers this value must not be changed after database is initialized.
+ * Set screen dimensions fixed on Authentication Method configuration screen so it is not affected when
+   changing DPI configuration on OS and the Next button is visible.
+ * Fixed an error that was not allowing to add Windows authenticated users when configuring the Server. Now
+   it is possible to add them in the Accounts and Roles screen.
+ * Since Server 8.0.11 the X Protocol is integrated on the Server product so there is no need to configure it
+   as a plugin.
+ * Now on Server 8.0.11 and newer the Plugins and Extentions configuration screen is removed and the MySQL X
+   Protocol Port field is moved to the Type and Networking configuration screen. For previous Server versions
+   that support X Protocol Plugin the configuration screens doesn't change.
+ * Fixed the Enterprise Firewall failure when configuring the Server.
+ * Fixed a bug that automatically selects 32 bit packages instead of 64 bit ones when selecting an option
+   different from Custom on the Install Type configuration screen for 64 bit bundles. Now the correct 64-bit
+   packages are automatically selected.
+ * Fixed a bug that was not allowing to add custom users when configuring 5.5 and 5.6 Server versions.
+ / Added funtionallity to configure the Enterprise Firewall after its installation. Now after the plugin is
+   installed successfully it is configured to run on recording mode for the root and the custom user accounts.
+
+
+ 1.4.25 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * Removed the NO_AUTO_CREATE_USER value assigned to the sql-mode server variable from the configuration file
+   template for the 8.0 series. The NO_AUTO_CREATE_USER value was already deprecated in previous Server
+   versions and finally removed in 8.0.11.
+ * Fixed configuration file templates in sections specific to the socket, default-character-set,
+   character-set-server and innodb_data_home_dir which were written to the configuration file with a wrong
+   value of 0.0.
+
+
+ 1.4.24 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * A new configuration page titled "Authentication Plugin" is shown starting with MySQL 8.0.4, since the
+   default authentication method has been changed from that version onwards to the caching_sha2_password
+   authentication plugin. The new page advertises the default authentication method change and its
+   consequences during package installation and give the user a possibility to change back to an
+   authentication method that also works with old clients.
+ * A new warning dialog is shown when upgrading from a milestone (pre- GA) MySQL Server release, to warn about
+   the risks of continuing (compatibility issues, or Server not starting at all) and about having to perform
+   some manual steps instead of just upgrading. The release notes of MySQL Server contain a disclaimer about
+   the upgrades from milestone releases, so now MySQL Installer shows the warning to users with all required
+   information to perform the needed manual steps instead. Users are able to proceed with the upgrade at their
+   own risk.
+ * MySQL Installer is now using .NET Framework 4.5.2, so this is a prerequisite.
+ * The configuration page where users can choose to setup a sandbox InnoDB cluster is now available for MySQL
+   8.0. The configuration of InnoDB cluster is no longer available on 32-bit operating systems. MySQL
+   Installer disables the option of configuring a sandbox InnoDB cluster if installing on Windows 32-bit.
+ * MySQL Installer has two new options "Install All Products" and "Only install GA Products" in the "Choosing
+   a Setup Type" page, which are shown only if the current Server bundle includes at least one pre-GA package
+   and if the selected setup type is Developer Default, Client only or Full.
+ * The "Install All Products" option allows the installation of pre-GA packages included in the bundle.
+ * Fixed a bug happening where a Server 32-bit was not found in the current bundle and was causing the MySQL
+   Installer not to look anymore for other 32-bit (or architecture ANY) client packages. Now even if a Server
+   32-bit is not in the current bundle and the setup type is supposed to return other client packages, those
+   are successfully returned. Improved the message shown to users if there are no packages found, so it is
+   clearer to understand why the message is being shown.
+ * The commercial edition of the MySQL Installer is including now an InnoDB Cluster admin tools that do not
+   require any prerequisites to be used. The community edition of the MySQL Installer includes admin tools
+   that do require a VC++ runtime to be installed. Starting from this version of MySQL Installer, if the
+   prerequisite is not already installed, the option to configure a sandbox InnoDB Cluster is disabled. If
+   disabled a link is shown from which a dialog to resolve the prerequisite can be accessed.
+ * Fixed a problem that was preventing the MySQL Installer from finding related Documentation and Samples
+   and Examples packages for MySQL Server 8.0.
+ * Fixed a problem where MySQL Installer was overwriting older settings in the configuration file during a
+   MySQL Server upgrade.
+ * The server_character_set and default_character_set options are commented in the configuration files
+   produced by MySQL Installer. This allows the MySQL Server to use the default value for those 2 options
+   appropriate for the Server version being configured. If the default values need to change, the values must
+   be assigned manually by editing the configuration file.
+ * Product requirements are no longer installed multiple times, when a requirement is about to be downloaded
+   it checks if it has been already fulfilled and if so the status is correctly reflected.
+ * Now the requirements list is cleared and recalculated correctly when going back and forth between the
+   Setup Types and the Requirements panels.
+ * Configuration steps only appear in the configuration summary panel if they are really needed. Steps will
+   no longer appear with an "if necessary" suffix, since if they appear in the list is because they are needed
+   and will perform actions.
+ * Fixed a problem where MySQL Server instances were being re-added to the list everytime the configuration
+   page for Samples and Wxamples was shown.
+ * The configuration step that updates the Windows firewall runs "netsh firewall" or "netsh advfirewall"
+   depending on the Windows version, where the latter is supported it is run instead of the former.
+
+
+ 1.4.23 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * Enhanced the prerequisite checks for the VC++ 2008 redistributable runtime, related to MySQL Server 5.5, so
+   it can detect different versions of the redistributable. The 2008 redistributable does not have a more
+   generic single way of detection like newer versions of it.
+ * Fixed a bug in the calculation of values performed during the Server configuration that depend on the
+   "Config Type" (Development / Server / Dedicated) when the format for numbers differ from the American
+   standard (i.e. commas are used for decimal separator, period used for thousands separator).
+ * Set configuration steps propertly on command line interface, when configuring a MySQL Server so it is
+   initialized, and started successfully.
+ * Added checks during the Samples & Examples product configuration to only start MySQL Server instances that
+   were not previously running, and only shut those started instances down.
+
+
+ 1.4.22 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * Added support for the caching_sha2_password plugin used in MySQL Server versions 8.0.4 and greater. This is
+   needed during Server configuration to be able to start the Server, which uses SHA2 password caching instead
+   of native authentication as in previous Server versions.
+
+
+ 1.4.21 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * Enabled TLS 1.2 protocol for all downloads made by the MySQL Installer for Windows.
+ * Set screen dimensions fixed on configuration screens so they are not affected when changing DPI
+   configuration on OS and the Next button is visible.
+ * When doing a sandbox InnoDB cluster configuration, the shortcuts created by the MySQL Installer to open the
+   CLI use the configuration file of the seed instance created by the configuration process.
+ * Removed the configuration panels that asks users for a sandbox InnoDB cluster's password. This was needed
+   to gracefully stop the sandbox cluster before attempting to do a classic configuration and to start the
+   sandbox cluster after the classic configuration was finished. There is no longer a need to stop and start
+   the sandbox cluster for the classic configuration to take place.
+ * Fixed a bug in the code that checks prerequisites in the Windows Registry that was happening only in 32-bit
+   versions of Windows.
+ * Changed the Visual Studio detection rules, needed to install MySQL for Visual Studio, to check for the
+   following registry keys: HKEY_CLASSES_ROOT\VisualStudio.DTE.X.Y (where X.Y stands for the supported
+   versions of Visual Studio, currently 10.0, 11.0, 12.0, 14.0 and 15.0).
+ * Fixed a but where the Install path was overwritten by its default value every time Configuration screen was
+   loaded. Now the default Install path value is set correctly only once.
+ * Made changes to the configuration page where MySQL Server instances compatible with the version of the
+   Samples and Examples product are shown, so that these instances are properly identified as stand-alone or
+   InnoDB cluster ones, and so that more information about them is shown to users. Also, it is now possible to
+   install the sample databases on multiple instances from this screen. The screen has a filter to hide MySQL
+   Server instances that may be running in read-only mode, which may be replica instances in an InnoDB cluster,
+   since data cannot be created in those.
+ * Fixed the detection rules for the Visual Studio Tools for Office needed to install MySQL for Excel.
+   The rules were changed to check a Windows Registry key in the Registry32 view instead of the Default one.
+ * Changed all VC++ runtime download links to point to the latest versions released by Microsoft including the
+   one that fixes an error where an older VC++ 64-bit runtime was causing problems needing to install its
+   corresponding 32-bit version as well. With these latest VC++ runtime versions that is no longer necessary.
+ * Added a password verification box to the sandbox InnoDB cluster configuration page. Also added visual aid
+   to report the password strength. This makes it consistent to the way a root password is supplied for the
+   stand-alone Server configuration.
+ * Added a validation to disallow empty or blank usernames added in the Accounts and Roles section of a MySQL
+   Server configuration.
+ * Fixed a cosmetic problem where the configuration log was showing messages when Windows Firewall ports were
+   being opened, but the messages were showing incorrect port numbers.
+ * Fixed a bug where the MySQL Installer was trying to start a stand-alone MySQL Server instance during a
+   sandbox InnoDB cluster configuration.
+ * Changed the way the Automatic Catalog Update process runs, it now runs using a system account which enables
+   the hiding of the process window correctly. This version of the MySQL Installer will patch an existing
+   Windows scheduled task related to the catalog update process to fix this behavior.
+ * Fixed a problem with passwords containing special characters like ";", so that they are processed and sent
+   to the MySQL Server correctly.
+ * Fixed a problem where the MySQL Windows Authentication plugin was not being added to the configuration file
+   when Windows authenticated users are added during the Server configuration.
+ * Enhanced the way the MySQL Installer overrides install locations defined in custom property values like
+   INSTALL_ROOT. This fixes a specific problem with MySQL Shell MSIs using INSTALL_ROOT to set the default
+   install location.
+ * Fixed the link to the MySQL Shell release notes displayed in the main dashboard of the MySQL Installer.
+ * Fixed the permissions the Automatic Catalog Update process needs so it can modify an already existing
+   product catalog when updates are available. This version of the MySQL Installer will patch an existing
+   Windows scheduled task related to the catalog update process to fix this behavior.
+ * Fixed a bug where the MySQL Installer was incorrectly processing a found catalog update, causing error
+   messages. Now when new products are found during a catalog update, only the required information is
+   processed.
+ * Enabled the automatic scrollbars for the text view of the product catalog update.
+ * Fixed a value in the configuration file for MySQL Server 5.5 installations so that the value of
+   MAX_ALLOWED_PACKET is set in the same way it is set for 5.6 and newer versions of the MySQL Server.
+ * Fixed a bug when upgrading a Server version previously configured as a sandbox InnoDB cluster. Now during
+   the upgrade configuration an explanation text will be shown with an option to recreate the sandbox cluster.
+   The mysql_upgrade tool will not be run against each instance of the sandbox cluster as per design, since
+   the sandbox cluster is for testing purposes only. So for the sake of ensuring a sandbox cluster will
+   continue working with a new Server version, the suggested option is to destroy the cluster and create it
+   again. If recreating the cluster is not chosen at this point, users will be responsible of recreating the
+   cluster or running mysql_upgrade on every instance of the sandbox cluster manually.
+ * Removed from the INI file templates entries related to InnoDB cluster configuration that are invalid to
+   start the Server. These settings were, in previous versions, commented out but since they are really not
+   valid values the Server understands, the settings should not be kept in that file. These values are now
+   stored in a file called installer_config.xml, found in the same location as the regular Server
+   configuration file.
+
+
+ 1.4.20 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * The query_cache_size and query_cache_type variables were removed from the my.ini configuration file
+   templates for MySQL Server 5.7 and 8.0, since they were deprecated and if present cause errors preventing
+   the Server from starting.
+ * Replaced the table_cache variable with table_open_cache in the my.ini configuration file templates for
+   MySQL Server 5.1 and 5.5, in the same way the variable has been already replaced in previous MySQL
+   Installer versions for Server 5.6 and greater.
+ * Fixed the detection of 32-bit prerequisites on 64-bit Windows environments when a 64-bit version of the
+   prerequisite was already present.
+ * Fixed the detection of Python 3.5 which even when installed for All Users it creats in the Windows Registry
+   keys in the CURRENT_USER hive instead of creating them in the LOCAL_MACHINE one.
+ * Fixed the detection of Python for the cases where the product is installed for the current user only.
+
+
+ 1.4.19 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * Added support to configure an InnoDB cluster sandbox test setup consisting of three, five, seven, or nine
+   MySQL server instances. InnoDB cluster requires MySQL 5.7.17 or higher.
+ * Added support to install and configure MySQL Router 2.1.3 or later as a local Windows service.
+ * Links to MySQL for Visual Studio feature documentation shown in the MySQL Installer dashboard did not
+   connect properly to the product information.
+ * The text box with the log of actions performed at the end of the configuration steps for a recently
+   installed MySQL server accepted text input.
+ * This fix ensures that the log is read-only and can be copied.
+
+
+ 1.4.18 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * The plugins are now loaded directly from the my.ini file, simplifying the process.
+ * The scheduled task is now created to be periodically executed at the very hour the installer is run for the
+   first time.
+
+
+ 1.4.17 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * The correct message is now displayed when no internet connection is available instead of displaying the
+   generic message of "Invalid credentials".
+ * Manifest was updated and it now shows all the latest version of products.
+ * When updating the Catalog it didn't accurately displayed the latest update date which is now fixed.
+ * On commercial editions, the password is now validated correclty on the first screen and we also display a
+   message specific to problems with the internet connection additional to the generic one for "Invalid
+   credentials".
+ * The problem that prevented users from downloading Connector C from the archive was fixed.
+ * There was a problem that prevented you from downloading and installing MySQL 5.6.29 GPL from the internet
+   which is now fixed.
+ * When deleting "%ProgramData%\MySQL\MySQL Installer for Windows\Manifest\Templates\my-template-5.7.ini"
+   and installing a 5.7 server the default "my-template.ini" should be enough to get the server started.
+ * A problem with the registry keys created an invalid state for MySQL Installer where two intallers from the
+   same version could be registered in the system at the same time. This is now fixed and should no longer occur.
+
+
+ 1.4.16 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * Enhanced the reconfigure process to allow my.ini updates avoiding loss of custom configuration values.
+
+
+ 1.4.15 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * Fixed problem with missing registry keys for local machine.
+ * Added a new configuration page for MySQL Server plugins, available when installing Server versions 5.7.12
+   and higher.
+
+
+ 1.4.14 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * loose_keyring_file_data option was added for server's 5.7.11 and greater.
+
+
+ 1.4.13 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * --skip-grant-tables option removed when is being upgraded any server
+
+
+ 1.4.12 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * CORRECTED TYPOS AND GRAMMAR ERRORS
+ * THE PATH TO EXECUTE THE MYSQL LAUNCHER (BOOTSTRAP) IS NORMALIZED REMOVING THE EXTRA SLASH
+ * IF THE CONFIGURATION IS CANCELED OR INCOMPLETE, THE RECONFIGURATION WILL WORK AS A NEW CONFIGURATION
+ * THE UPDATE MSI IS NOW ENCLOSED WITH DOUBLE QUOTES TO ENSURE THE UPDATE MSI IS LAUNCHED CORRECTLY
+ * WHEN THE CONFIGURATION FILE DOESN'T HAVE THE SECTION [MYSQL] THE INSTALLER CRASHED, NOW IS VALIDATED WITH
+   A DEFAULT VALUES TO AVOID ANY PROBLEM
+ * SUPPORT FOR /PASSIVE OR /QB!- NOW WORK THE SAME AS /QN DOES WITH CONSOLEARGS
+ * THE CHECK FOR PREREQUISITES IN UPGRADES NOW EXECUTES CORRECTLY
+
+
+ 1.4.11 Bugs Fixed / Improvements
+--------------------------------------------------------------------------------------------------------------
+ * THE INSTALLER IS THROWING AN EXCEPTION WHEN IS DETECTING EXISTING PRODUCTS
+
+
+ 1.4.10 Bugs Fixed / Improvements
+-------------------------------------------------------------------------------------------------------------
+ * RUNNING MSI IN CONSOLE MODE DIRECTLY DOESN'T WORK 
+ * QUIET MODE INSTALL FAILS TO INSTALL MANIFEST 
+ * MYSQL INSTALLER - COMMUNITY UPGRADES WORKBENCH FROM GA 6.2.5 TO RC 6.3.2 
+ * MYSQL INSTALLER FALS TO UPGRADE ITSELF 
+ * CLI DOESN'T WORK SPECIFYING INSTALLDIR OR DATADIR 
+ * ISSUES WHILE UPGRADING MYSQL UTILITIES 1.5.4 TO 1.5.5 USING WINDOWS INSTALLERS. 
+ * INSTALLER OPENS FIREWALL PORT EVEN IF THE USER CHOOSE NOT TO 
+ * NAMING ISSUE NOTICED IN MYSQL UTILITIES 1.5.2 WINDOWS INSTALLERS 
+ * MYSQL FABRIC NOT INSTALLED AS PART OF MYSQL UTILITIES1.5.5 COMMERCIAL INSTALLER 
+
+
+ 1.4.9 Bugs  Fixed / Improvements
+-------------------------------------------------------------------------------------------------------------
+ * Verified the installer detect well an updated VSTO for MySQL for Excel
+ * Fix a problem happening during the manifest automatic updates (prompt to apply update that cause a null
+   reference exception)
+ * The first the installer runs, a non-custom setup type will try to install the packages shipped in the
+   bundle, not the latest GA available
+ * Add Alerts when upgrading Utilities or install fabric using different msi 
+ * Added secure-file-priv option with a default "uploads" directory in the ini templates
+
+
+ 1.4.8 Bugs  Fixed / Improvements
+-------------------------------------------------------------------------------------------------------------
+ * Fixed for Enterprise Firewall's new requirement
+
+
+ 1.4.7 Bugs  Fixed / Improvements
+-------------------------------------------------------------------------------------------------------------
+ * Added support for Enterprise Firewall
+
+
+ 1.4.6 Bugs  Fixed / Improvements
+-------------------------------------------------------------------------------------------------------------
+ * Refactor Installer to support --initialize to initialize the db on Server 5.7.7 and higher installations.
+
+
+ 1.4.5 Bugs  Fixed / Improvements
+-------------------------------------------------------------------------------------------------------------
+ * Generated my.ini now only defines SORT_BUFFER_SIZE=256K once.
+ * Changed Installer upgrade to properly close the background dialog.
+ * Update the manifest automatically the fist time of run form msi.
+ * Select proper server version after the Installer is upgraded.
+ * Fixed failing upgrade check caused by incorrect ManifestUpdates.xml.
+
+
+ 1.4.4 Bugs  Fixed / Improvements
+-------------------------------------------------------------------------------------------------------------
+ * Add Support to the installer to handle "default" property from the manifest (for select / unselect
+   features by default)
+ * ISSUES WITH C/PYTHON 2.0.1 WINDOWS INSTALLERS (not allowed to install at the same time every Python flavor
+   of the connector) old bug verified as fixed
+ * MYSQL INSTALLER INSTALLS 32-BIT VERSION ON 64-BIT SYSTEM BY DEFAULT
+ * WINDOWS INSTALLER FAILED TO CONFIGURE THE MYSQL SERVER DURING PASSWORD UPDATE (for MySQL Server 5.7.6 due
+   to a change in user management)
+
+
+ 1.4.3 Bugs Fixed
+-------------------------------------------------------------------------------------------------------------
+ * MYSQL FOR EXCEL GRAYED OUT IN CUSTOM PRODUCT SELECTION SCREEN 
+ * CAN'T INSTALL PACKAGES WHICH ARCHITECTURE IS ANY IN WINDOWS 32 BITS 
+ * UNABLE TO DOWNLOAD MYSQL FOR VISUAL STUDIO USING THE INSTALLER 
+ * MISSING PY2.7 AND PY3.4 MSI PACKAGES IN THE C/PYTHON 2.0.1 WINDOWS INSTALLERS 
+ * STRING NOT RECOGNIZED AS A VALID DATETIME 
+ * Check if the number and archive are not empty 
+ * Check if the type of the filed is zip and is commercial missing prerequisite check for utilities/fabric
+   product 
+ * Check the ZIP file downloaded 
+ * Add support for prerequisite check in upgrade wizard 
+ * Add support for MOS to updater and support for zip files 
+ * INTERNAL ERROR WHEN CHANGING THE LOCALE AFTER CANCEL INSTALLATION 
+
+
+ 1.4.2 Bugs fixed	
+-------------------------------------------------------------------------------------------------------------
+ * COMMERCIAL INSTALLERS NOT ALLOWING USER TO INSTALL COMPONENTS
+ * MYSQL V1.4.1 INSTALLER CUSTOM INSTALL ONLY PROVIDES PYTHON 2_7 1.2.3
+ * MYSQL 5.6.21 V1.4 INSTALLER LOOKING FOR NON-EXISTANT DIRECTORY
+ * Hi-DPI Support
+ * Can't install more than one connector python at the same time
+
+
+ 1.4.1 Bugs fixed	
+-------------------------------------------------------------------------------------------------------------
+ * The update-manifest-scheduled task contains a malformed action command
+ * CHANGE HISTORY SCREEN MISSING DEFAULT DATES SHOULD BE DISPLAYED IN A NICER WAY
+ * [RECONFIG] Installer is not populating Pipe and/or memory fields correctly
+ * [RECONFIG] Can't proceed after enter root password
+ * Installing 1.4 doesn't remove 1.3
+ * The requirements check is not working good for different rules (x64 | x32)
+ * Add new default filter when the installer is launched from the MSI

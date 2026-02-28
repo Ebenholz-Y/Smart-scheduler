@@ -1,0 +1,341 @@
+{
+  "schedule": [
+    {
+      "course": {
+        "id": 1,
+        "name": "高等数学",
+        "students": 39,
+        "teacher": "陈老师",
+        "hours": 3,
+        "credits": 2,
+        "location": "B202"
+      },
+      "time": "周三 第5节",
+      "classroom": {
+        "id": "A101",
+        "capacity": 45,
+        "available": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "course": {
+        "id": 2,
+        "name": "大学英语",
+        "students": 32,
+        "teacher": "张老师",
+        "hours": 3,
+        "credits": 2,
+        "location": "A102"
+      },
+      "time": "周二 第5节",
+      "classroom": {
+        "id": "B201",
+        "capacity": 41,
+        "available": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "course": {
+        "id": 3,
+        "name": "计算机网络",
+        "students": 43,
+        "teacher": "赵老师",
+        "hours": 3,
+        "credits": 2,
+        "location": "A101"
+      },
+      "time": "周一 第6节",
+      "classroom": {
+        "id": "A101",
+        "capacity": 45,
+        "available": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "course": {
+        "id": 4,
+        "name": "数据结构",
+        "students": 34,
+        "teacher": "陈老师",
+        "hours": 3,
+        "credits": 2,
+        "location": "A101"
+      },
+      "time": "周四 第9节",
+      "classroom": {
+        "id": "C301",
+        "capacity": 49,
+        "available": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "course": {
+        "id": 5,
+        "name": "操作系统",
+        "students": 33,
+        "teacher": "李老师",
+        "hours": 3,
+        "credits": 2,
+        "location": "C302"
+      },
+      "time": "周二 第2节",
+      "classroom": {
+        "id": "B202",
+        "capacity": 37,
+        "available": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "course": {
+        "id": 6,
+        "name": "线性代数",
+        "students": 43,
+        "teacher": "李老师",
+        "hours": 3,
+        "credits": 2,
+        "location": "B201"
+      },
+      "time": "周一 第10节",
+      "classroom": {
+        "id": "A101",
+        "capacity": 45,
+        "available": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "course": {
+        "id": 7,
+        "name": "概率统计",
+        "students": 20,
+        "teacher": "赵老师",
+        "hours": 3,
+        "credits": 2,
+        "location": "C302"
+      },
+      "time": "周四 第8节",
+      "classroom": {
+        "id": "B201",
+        "capacity": 41,
+        "available": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "course": {
+        "id": 8,
+        "name": "C语言程序设计",
+        "students": 48,
+        "teacher": "王老师",
+        "hours": 3,
+        "credits": 2,
+        "location": "B201"
+      },
+      "time": "周四 第2节",
+      "classroom": {
+        "id": "C301",
+        "capacity": 49,
+        "available": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "course": {
+        "id": 9,
+        "name": "高等数学(2)",
+        "students": 41,
+        "teacher": "王老师",
+        "hours": 3,
+        "credits": 2,
+        "location": "C301"
+      },
+      "time": "周一 第2节",
+      "classroom": {
+        "id": "B201",
+        "capacity": 41,
+        "available": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "course": {
+        "id": 10,
+        "name": "大学英语(2)",
+        "students": 23,
+        "teacher": "王老师",
+        "hours": 3,
+        "credits": 2,
+        "location": "C301"
+      },
+      "time": "周一 第6节",
+      "classroom": {
+        "id": "B202",
+        "capacity": 37,
+        "available": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "course": {
+        "id": 11,
+        "name": "计算机网络(2)",
+        "students": 33,
+        "teacher": "陈老师",
+        "hours": 3,
+        "credits": 2,
+        "location": "B201"
+      },
+      "time": "周五 第3节",
+      "classroom": {
+        "id": "A102",
+        "capacity": 47,
+        "available": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "course": {
+        "id": 12,
+        "name": "数据结构(2)",
+        "students": 45,
+        "teacher": "陈老师",
+        "hours": 3,
+        "credits": 2,
+        "location": "C302"
+      },
+      "time": "周三 第9节",
+      "classroom": {
+        "id": "A101",
+        "capacity": 45,
+        "available": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    }
+  ],
+  "fitness": 240
+}
