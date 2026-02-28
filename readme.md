@@ -9,13 +9,10 @@
 - **数据库**：MySQL
 
 ## 🔧总体架构设计
-    层次	    模块/组件	       核心功能
-前端界面层 	login.html	    用户登录与身份验证
-            timetable.html	课表展示、拖拽调整、冲突提示
-API网关层	  server.js	      路由分发、跨域支持、请求/响应格式化
-业务逻辑层	  auth.js	        用户认证、角色权限控制
-            scheduler.js	  遗传算法排课、冲突检测、智能重排
-数据访问层	  dbConfig.js	    MySQL连接池配置与管理
+系统采用前后端分离架构，支持多角色登录、自动排课与交互式调课。
+
+<img width="867" height="386" alt="image" src="https://github.com/user-attachments/assets/555b62d4-650c-4bba-bbc0-11729462a286" />
+
 
 ## 🛠 构建与运行（详参配布与操作）
 
