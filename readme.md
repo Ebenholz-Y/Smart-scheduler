@@ -35,13 +35,23 @@
 1.效率提升显著
 自动排课可在几分钟内完成
 批量处理能力强大
+可自行导入课表并导出排课结果excel和pdf
+
 2.冲突检测与避免
 实时冲突检测机制
 多重约束条件自动满足
+
 3.多目标优化
 教室利用率最优化
+
 4.灵活可维护
 支持动态调整
 实时可视化展示
 
-## 📸 效果截图（请替换为实际截图）
+## 📸 效果截图
+原课程表：
+<img width="1513" height="664" alt="屏幕截图 2025-12-24 081726" src="https://github.com/user-attachments/assets/9d2b525f-de30-4e80-a7c0-986f9b8d686c" />
+
+排课结果：
+<img width="1838" height="909" alt="屏幕截图 2025-12-24 224809" src="https://github.com/user-attachments/assets/82be34f5-5c7f-43be-9f02-fcdcd4a6c7c5" />
+
