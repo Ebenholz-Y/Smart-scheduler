@@ -6,34 +6,25 @@
 - **后端**：Python 3.9+、Flask、PuLP（ILP 建模库）
 - **求解器**：CBC（开源 MILP 求解器）
 - **前端**：HTML/CSS/JavaScript（原生）
-- **数据库**：SQLite
+- **数据库**：MySQL
 
 ## 🛠 构建与运行
-
-### 安装依赖
-```bash
-pip install -r requirements.txt
-启动服务
-bash
-
-编辑
-
-python app.py
-访问界面
-浏览器打开：http://localhost:5000
-🗂 项目结构
+访问系统
+1. 打开登录页
+浏览器访问：
 text
-
 编辑
-
-
-
-scheduler/
-├── app.py            # Flask 主入口
-├── solver.py         # ILP 模型定义与求解
-├── static/           # CSS/JS 资源
-├── templates/        # HTML 页面模板
-└── database.db       # 自动生成的 SQLite 数据库
+http://localhost:3000/login.html
+2. 登录账号（
+管理员：A_admin / 123456
+教师：T_张三 / 123456
+学生：S_23物联网工程1班 / 123456
+3. 管理员执行自动排课
+登录后跳转到 timetable.html?user=A_admin
+点击 “🚀 自动排课”（只有管理员可见）
+系统将根据 scheduler.js 算法生成课表
+4. 其他用户查看课表
+学生/教师登录后自动进入自己的课表视图
 
 📈 核心成果
 支持 100+ 课程、50+ 教室、20+ 教师的复杂场景
